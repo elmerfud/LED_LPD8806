@@ -5,13 +5,21 @@
  #include <pins_arduino.h>
 #endif
 
-class LPD8806 {
+// I don't know of any LPD8806 strips that aren't GRB, but I don't know everything
+// Adding this option because it seems handing, defaulting class to use GRB
+#define COLOR_ORDER_RGB 0
+#define COLOR_ORDER_GRB 1
+
+// Pause after latch
+#define PAUSE_TIME 3
+
+class Adafruit_LPD8806 {
 
  public:
 
-  LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin); // Configurable pins
-  LPD8806(uint16_t n); // Use SPI hardware; specific pins only
-  LPD8806(void); // Empty constructor; init pins/strip length later
+  Adafruit_LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin, uint8_t order=COLOR_ORDER_GRB); // Configurable pins
+  Adafruit_LPD8806(uint16_t n, uint8_t order=COLOR_ORDER_GRB); // Use SPI hardware; specific pins only
+  Adafruit_LPD8806(void); // Empty constructor; init pins/strip length later
   void
     begin(void),
     show(void),
@@ -20,15 +28,12 @@ class LPD8806 {
     updatePins(uint8_t dpin, uint8_t cpin), // Change pins, configurable
     updatePins(void), // Change pins, hardware SPI
     updateLength(uint16_t n); // Change strip length
+    updateOrder(uint8_t order); // Change data order
   uint16_t
     numPixels(void);
   uint32_t
-    Color(byte, byte, byte),
     getPixelColor(uint16_t n);
 
-  // These primarily exist for debugging and will likely come out later:
-  boolean
-    slowmo; // If true, use digitalWrite instead of direct PORT writes
   uint8_t
     pause;  // Delay (in milliseconds) after latch
 
@@ -38,6 +43,7 @@ class LPD8806 {
     numLEDs; // Number of RGB LEDs in strip
   uint8_t
     *pixels, // Holds LED color values (3 bytes each)
+    rgb_order, // Color order; RGB vs GRB (or others, if needed in future)
     clkpin    , datapin,     // Clock & data pin numbers
     clkpinmask, datapinmask; // Clock & data PORT bitmasks
   volatile uint8_t
