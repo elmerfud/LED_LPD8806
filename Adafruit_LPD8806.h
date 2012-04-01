@@ -34,9 +34,6 @@ class Adafruit_LPD8806 {
   uint32_t
     getPixelColor(uint16_t n);
 
-  uint8_t
-    pause;  // Delay (in milliseconds) after latch
-
  private:
 
   uint16_t
