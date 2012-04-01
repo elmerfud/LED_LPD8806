@@ -154,7 +154,7 @@ void Adafruit_LPD8806::show(void) {
   // write 24 bits per pixel
   if (hardwareSPI) {
     for (i=0; i<nl3; i++ ) {
-      SPDR = pixels[i];
+      SPDR = 0x80 | (pixels[i] >> 1);
       while(!(SPSR & (1<<SPIF)));
     }
   } else {
@@ -181,13 +181,13 @@ void Adafruit_LPD8806::setPixelColor(uint16_t n, uint8_t r, uint8_t g, uint8_t b
     uint8_t *p = &pixels[n * 3];
     // See notes later regarding color order
     if(rgb_order == COLOR_ORDER_RGB) {
-      *p++ = r | 0x80;
-      *p++ = g | 0x80;
+      *p++ = r;
+      *p++ = g;
     } else {
-      *p++ = g | 0x80;
-      *p++ = r | 0x80;
+      *p++ = g;
+      *p++ = r;
     }
-    *p++ = b | 0x80;
+    *p++ = b;
   }
 }
 
@@ -200,13 +200,13 @@ void Adafruit_LPD8806::setPixelColor(uint16_t n, uint32_t c) {
     // types.  For compatibility with existing code, 'packed' RGB
     // values passed in or out are always 0xRRGGBB order.
     if(rgb_order == COLOR_ORDER_RGB) {
-      *p++ = (c >> 16) | 0x80; // Red
-      *p++ = (c >>  8) | 0x80; // Green
+      *p++ = (c >> 16); // Red
+      *p++ = (c >>  8); // Green
     } else {
-      *p++ = (c >>  8) | 0x80; // Green
-      *p++ = (c >> 16) | 0x80; // Red
+      *p++ = (c >>  8); // Green
+      *p++ = (c >> 16); // Red
     }
-    *p++ = c | 0x80;         // Blue
+    *p++ = c;         // Blue
   }
 }
 

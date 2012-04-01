@@ -1,3 +1,14 @@
+# Customize version of Adafruits LPD8806 library #
+
+The library has been modified so that it's interchangable with my version of
+the Adafruit\_WS2801 library.  It takes 8 bit color values and adjusts them 
+to 7 bits for the LPD8806 when sending them to the strip. 
+
+Modified examples have been removed and placed in their own repository.
+
+
+
+
 # Arduino library for LPD8806 #
 This Library was written for the LPD8806 PWM LED driver chips, strips and pixels.
 But the LPD8803/LPD8809 will probably work too.
