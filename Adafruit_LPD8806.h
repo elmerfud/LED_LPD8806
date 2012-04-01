@@ -27,7 +27,7 @@ class Adafruit_LPD8806 {
     setPixelColor(uint16_t n, uint32_t c),
     updatePins(uint8_t dpin, uint8_t cpin), // Change pins, configurable
     updatePins(void), // Change pins, hardware SPI
-    updateLength(uint16_t n); // Change strip length
+    updateLength(uint16_t n), // Change strip length
     updateOrder(uint8_t order); // Change data order
   uint16_t
     numPixels(void);

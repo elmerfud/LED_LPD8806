@@ -135,12 +135,6 @@ void Adafruit_LPD8806::writeLatch(uint16_t n) {
 
   if (hardwareSPI) {
     while(n--) SPI.transfer(0);
-  } else if(slowmo) {
-    digitalWrite(datapin, LOW);
-    for(uint16_t i = 8 * n; i>0; i--) {
-      digitalWrite(clkpin, HIGH);
-      digitalWrite(clkpin, LOW);
-    }
   } else {
     *dataport &= ~datapinmask; // Data is held low throughout
     for(uint16_t i = 8 * n; i>0; i--) {
