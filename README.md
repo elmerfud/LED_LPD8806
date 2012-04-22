@@ -1,4 +1,4 @@
-# Customize version of Adafruits LPD8806 library #
+# Customized version of Adafruits LPD8806 library #
 
 The library has been modified so that it's interchangable with my version of
 the Adafruit\_WS2801 library.  It takes 8 bit color values and adjusts them 

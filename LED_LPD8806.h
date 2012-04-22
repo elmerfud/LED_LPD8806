@@ -13,13 +13,13 @@
 // Pause after latch
 #define PAUSE_TIME 3
 
-class Adafruit_LPD8806 {
+class LED_LPD8806 {
 
  public:
 
-  Adafruit_LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin, uint8_t order=COLOR_ORDER_GRB); // Configurable pins
-  Adafruit_LPD8806(uint16_t n, uint8_t order=COLOR_ORDER_GRB); // Use SPI hardware; specific pins only
-  Adafruit_LPD8806(void); // Empty constructor; init pins/strip length later
+  LED_LPD8806(uint16_t n, uint8_t dpin, uint8_t cpin, uint8_t order=COLOR_ORDER_GRB); // Configurable pins
+  LED_LPD8806(uint16_t n, uint8_t order=COLOR_ORDER_GRB); // Use SPI hardware; specific pins only
+  LED_LPD8806(void); // Empty constructor; init pins/strip length later
   void
     begin(void),
     show(void),
